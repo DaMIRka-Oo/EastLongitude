@@ -100,9 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _highlight: {fileID: 9019828769977447312}
-  _renderer: {fileID: 4363926246637779523}
-  _baseColor: {r: 0.13199228, g: 0.754717, b: 0.11747954, a: 0.41960785}
+  _renderer: {fileID: 2048809058591775769}
+  _highglightRenderer: {fileID: 4363926246637779523}
+  _baseColor: {r: 0.8773585, g: 0.15312389, b: 0.15312389, a: 0.9019608}
   _offsetColor: {r: 0.13333334, g: 0.75686276, b: 0.11764706, a: 0.2}
+  isActive: 0
 --- !u!61 &8132882258203810027
 BoxCollider2D:
   m_ObjectHideFlags: 0

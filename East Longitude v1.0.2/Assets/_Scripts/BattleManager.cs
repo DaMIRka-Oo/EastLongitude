@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -80,8 +81,24 @@ public class BattleManager : MonoBehaviour
         {
             x_Hexs_Choise[i] = hero1.X_Hex - 1 + i;
             y_Hexs_Choise[i] = hero1.Y_Hex - 1 + i;
+
         }
         
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (x_Hexs_Choise[i] >= 0 && x_Hexs_Choise[i] < 15 && y_Hexs_Choise[j] >= 0 && y_Hexs_Choise[j] < 4)
+                {
+                    /*hex = GameObject.Find($"Hex {j} {i}");
+                    Hex hexClass = hex.AddComponent<Hex>();
+                    hexClass.isActive = true;*/
+                    GameObject newHex = GameObject.Find($"Hex {y_Hexs_Choise[j]} {x_Hexs_Choise[i]}");
+                    newHex.GetComponent<Hex>().isActive = true;
+                }
+                
+            }
+        }
 
     }
 
