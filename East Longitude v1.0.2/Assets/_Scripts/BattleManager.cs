@@ -22,9 +22,10 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateBattleState(BattleState.General);
+        
         
         Invoke("PutHero", 0.1f);
+        //UpdateBattleState(BattleState.General);
     }
 
     private void Awake()
@@ -69,7 +70,14 @@ public class BattleManager : MonoBehaviour
 
     private void DropExtraElements()
     {
-
+        for (int i = 0; i < 15; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                GameObject newHex = GameObject.Find($"Hex {j} {i}");
+                newHex.GetComponent<Hex>().isActive = false;
+            }
+        }
     }
 
     private void ChoiseLoc()

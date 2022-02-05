@@ -7,7 +7,15 @@ public class MoveButton : MonoBehaviour
     private void OnMouseDown()
     {
       //  BattleManager.OnBattleStateChanged += BattleManagerChangeState;
-        BattleManager.Instance.UpdateBattleState(BattleState.Move);
+        if (BattleManager.Instance.State == BattleState.Move)
+        {
+            BattleManager.Instance.UpdateBattleState(BattleState.General);
+        }
+        else
+        {
+            BattleManager.Instance.UpdateBattleState(BattleState.Move);
+        }
+        
     }
 
     private void BattleManagerChangeState(BattleState state)

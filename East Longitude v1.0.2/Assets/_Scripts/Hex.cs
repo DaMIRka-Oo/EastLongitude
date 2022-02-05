@@ -33,9 +33,9 @@ public class Hex : MonoBehaviour
     public void Update()
     {
        if (isActive)
-       {
-            _renderer.enabled = true;
-       }
+            _renderer.enabled = true;       
+       else
+            _renderer.enabled = false;
     }
     void OnMouseEnter()
     {
