@@ -8,7 +8,7 @@ public class HexManager : MonoBehaviour
 
     [SerializeField] private float _Xstart, _Ystart, _Xstep, _Ystep, _shift;
 
-    [SerializeField] private Hex _tilePrefab;
+    [SerializeField] private Hex _hexPrefab;
 
     [SerializeField] private Transform _cam;
 
@@ -26,7 +26,7 @@ public class HexManager : MonoBehaviour
 
             for (float x = shift + _Xstart, j = 0; x < shift + _Xstart + _width * _Xstep; x += _Xstep, j++)
             {
-                var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
+                var spawnedTile = Instantiate(_hexPrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Hex {i} {j}";
 
             }
