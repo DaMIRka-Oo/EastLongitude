@@ -12,6 +12,14 @@ public class Hex : MonoBehaviour
     {
         _renderer.color = isOffset ? _offsetColor : _baseColor;
     }
+
+    public void Update()
+    {
+        if (BattleManager.Instance.State == BattleState.Move)
+        {
+
+        }
+    }
     void OnMouseEnter()
     {
         _highlight.SetActive(true);
