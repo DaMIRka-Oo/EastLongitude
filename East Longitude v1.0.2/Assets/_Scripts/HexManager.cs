@@ -19,16 +19,19 @@ public class HexManager : MonoBehaviour
 
     public void GenerateGrid()
     {
-        for (float y = _Ystart, i = 0; y > _Ystart - _height * _Ystep; y -= _Ystep, i++)
+        for (float y = _Ystart, i = 0; i < _height; y -= _Ystep, i++)
         {
             float shift = 0;
             if (i % 2 != 0) shift = _shift;
 
-            for (float x = shift + _Xstart, j = 0; x < shift + _Xstart + _width * _Xstep; x += _Xstep, j++)
+            for (float x = shift + _Xstart, j = 0; j < _width; x += _Xstep, j++)
             {
                 var spawnedTile = Instantiate(_hexPrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Hex {i} {j}";
 
+
+                var isOffset = (i % 2 == 0 && j % 2 != 0) || (i % 2 != 0 && j % 2 == 0);
+                spawnedTile.Init(isOffset);
             }
         }
     }
