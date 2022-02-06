@@ -19,11 +19,15 @@ public class BattleManager : MonoBehaviour
 
     Hero hero1;
 
+    Vector3 startPosition;
+    Vector3 endPosition;
+    bool isMove;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+
+        isMove = false;
         Invoke("PutHero", 0.1f);
         //UpdateBattleState(BattleState.General);
     }
@@ -34,8 +38,19 @@ public class BattleManager : MonoBehaviour
        // Debug.Log(1);
     }
 
+    private void Update()
+    {
+        if (isMove)
+        {
+            // hero.transform.position = Vector3.Lerp(hex.transform.position, endPosition, 1);
+            hero.transform.position = Vector3.MoveTowards(hex.transform.position, endPosition, 1);
+            startPosition = endPosition;
+            isMove = false;
+        }
+    }
 
-    public void PutHero()
+
+    private void PutHero()
     {
         int x = UnityEngine.Random.Range(0, 5);
         int y = UnityEngine.Random.Range(0, 3);
@@ -44,6 +59,7 @@ public class BattleManager : MonoBehaviour
         CreateHero(x, y);
         hero.transform.position = hex.transform.position;
         hero.transform.position += new Vector3(0, hero.transform.localScale.y * 14);
+        startPosition = hero.transform.position;
     }
 
     public void UpdateBattleState(BattleState newState)
@@ -98,9 +114,6 @@ public class BattleManager : MonoBehaviour
             {
                 if (x_Hexs_Choise[i] >= 0 && x_Hexs_Choise[i] < 15 && y_Hexs_Choise[j] >= 0 && y_Hexs_Choise[j] < 4)
                 {
-                    /*hex = GameObject.Find($"Hex {j} {i}");
-                    Hex hexClass = hex.AddComponent<Hex>();
-                    hexClass.isActive = true;*/
                     GameObject newHex = GameObject.Find($"Hex {y_Hexs_Choise[j]} {x_Hexs_Choise[i]}");
                     newHex.GetComponent<Hex>().isActive = true;
                 }
@@ -108,6 +121,26 @@ public class BattleManager : MonoBehaviour
             }
         }
 
+    }
+
+
+    public void MoveHero(int y, int x)
+    {
+        Debug.Log($"Hex {y} {x}");
+        Debug.Log(' ');
+        hex = GameObject.Find($"Hex {y} {x}");
+        CreateHero(x, y);
+      //  hero.transform.position = hex.transform.position;
+      //  hero.transform.position += new Vector3(0, hero.transform.localScale.y * 14);
+      //  Vector3 newPosition = hex.transform.position;
+      //  newPosition += new Vector3(0, hero.transform.localScale.y * 14);
+      //  hero.transform.position = Vector3.Lerp(hex.transform.position, newPosition, 100);
+
+        endPosition = hex.transform.position;
+        endPosition += new Vector3(0, hero.transform.localScale.y * 14);
+        isMove = true;
+
+        UpdateBattleState(BattleState.General);
     }
 
     private void CreateHero(int x, int y)

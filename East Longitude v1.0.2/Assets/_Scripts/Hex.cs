@@ -11,6 +11,35 @@ public class Hex : MonoBehaviour
 
     public bool isActive;
 
+    int y, x;
+
+    public int Y
+    {
+        get
+        {
+            return y;
+        }
+
+        set
+        {
+            y = value;
+        }
+    }
+
+
+    public int X
+    {
+        get
+        {
+            return x;
+        }
+
+        set
+        {
+            x = value;
+        }
+    }
+
 
     public void Init(bool isOffset)
     {
@@ -27,7 +56,13 @@ public class Hex : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(isActive);
+        if (isActive)
+        {
+            isActive = false;
+            Debug.Log(this.name);
+            BattleManager.Instance.MoveHero(System.Convert.ToInt32(this.name.Split(" ")[1]),
+                                            System.Convert.ToInt32(this.name.Split(" ")[2]));
+        }
     }
 
     public void Update()
