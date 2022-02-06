@@ -59,7 +59,6 @@ public class Hex : MonoBehaviour
         if (isActive)
         {
             isActive = false;
-            Debug.Log(this.name);
             BattleManager.Instance.MoveHero(System.Convert.ToInt32(this.name.Split(" ")[1]),
                                             System.Convert.ToInt32(this.name.Split(" ")[2]));
         }

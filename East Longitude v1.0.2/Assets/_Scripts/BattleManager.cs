@@ -10,10 +10,6 @@ public class BattleManager : MonoBehaviour
 
     public static event System.Action<BattleState> OnBattleStateChanged;
 
-    [SerializeField] private SpriteRenderer _renderer;
-
-
-
     public GameObject hero;
     public GameObject hex;
 
@@ -26,7 +22,6 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         isMove = false;
         Invoke("PutHero", 0.1f);
         //UpdateBattleState(BattleState.General);
@@ -35,18 +30,18 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-       // Debug.Log(1);
     }
 
     private void Update()
     {
         if (isMove)
         {
-            // hero.transform.position = Vector3.Lerp(hex.transform.position, endPosition, 1);
-            hero.transform.position = Vector3.MoveTowards(hex.transform.position, endPosition, 1);
-            startPosition = endPosition;
-            isMove = false;
+            hero.transform.position = Vector3.Lerp(startPosition, endPosition, 5*Time.deltaTime);
+            startPosition = Vector3.Lerp(startPosition, endPosition, 5 * Time.deltaTime);
+            if (startPosition == endPosition)
+                isMove = false;
         }
+        
     }
 
 
@@ -64,7 +59,7 @@ public class BattleManager : MonoBehaviour
 
     public void UpdateBattleState(BattleState newState)
     {
-        Debug.Log(newState);
+        //Debug.Log(newState);
         State = newState;
 
         switch (newState)
@@ -126,15 +121,10 @@ public class BattleManager : MonoBehaviour
 
     public void MoveHero(int y, int x)
     {
-        Debug.Log($"Hex {y} {x}");
-        Debug.Log(' ');
+       // Debug.Log($"Hex {y} {x}");
+       // Debug.Log(' ');
         hex = GameObject.Find($"Hex {y} {x}");
         CreateHero(x, y);
-      //  hero.transform.position = hex.transform.position;
-      //  hero.transform.position += new Vector3(0, hero.transform.localScale.y * 14);
-      //  Vector3 newPosition = hex.transform.position;
-      //  newPosition += new Vector3(0, hero.transform.localScale.y * 14);
-      //  hero.transform.position = Vector3.Lerp(hex.transform.position, newPosition, 100);
 
         endPosition = hex.transform.position;
         endPosition += new Vector3(0, hero.transform.localScale.y * 14);
